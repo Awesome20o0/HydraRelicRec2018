@@ -1,0 +1,7 @@
+md "C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\obj\local\x86" >NUL 2>NUL || rem
+C:/Users/Varun/AppData/Local/Android/sdk/ndk-bundle/build//../prebuilt/windows-x86_64/bin/echo.exe [x86] "Prebuilt       ": "libopencv_java3.so <= C:/Users/Varun/Desktop/OpenCV-android-sdk/sdk/native/jni/../libs/x86/"
+copy /b/y "C:\Users\Varun\Desktop\OpenCV-android-sdk\sdk\native\jni\..\libs\x86\libopencv_java3.so" "C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\obj\local\x86\libopencv_java3.so" > NUL
+md "C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\lib\x86" >NUL 2>NUL || rem
+C:/Users/Varun/AppData/Local/Android/sdk/ndk-bundle/build//../prebuilt/windows-x86_64/bin/echo.exe [x86] "Install        ": "libopencv_java3.so => C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\lib/x86/libopencv_java3.so"
+copy /b/y "C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\obj\local\x86\libopencv_java3.so" "C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\lib\x86\libopencv_java3.so" > NUL
+C:/Users/Varun/AppData/Local/Android/sdk/ndk-bundle/build//../toolchains/x86-4.9/prebuilt/windows-x86_64/bin/i686-linux-android-strip --strip-unneeded  C:\Users\Varun\Desktop\FTCCode\HydraRelicRecoveryMaster\TeamCode\build\intermediates\ndkBuild\release\lib/x86/libopencv_java3.so
