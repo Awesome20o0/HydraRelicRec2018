@@ -285,23 +285,33 @@ public class Drivetrain_Mecanum{
 
     public void strafe(double diag1, double diag2, double direction, double current){
 
+        // Passing positive numbers
+
+        // Negatives
         final double FL = diag1 * Math.sin(direction - Math.PI/4);
         final double FR = diag2 * Math.sin(direction - Math.PI/4);
+
+        // Positives
         final double BL = diag2 * Math.cos(direction - Math.PI/4);
         final double BR = diag1 * Math.cos(direction - Math.PI/4);
 
         if(sensor.getGyroYaw() < current)
         {
+            // Make this number bigger
             motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
             motorBL.setPower(BL);
+
+            // Make this number smaller
             motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
             motorFR.setPower(FR);
         }
         else if (sensor.getGyroYaw() > current)
         {
             motorFL.setPower(FL);
+            // Make this number bigger
             motorBL.setPower(BL + ((sensor.getGyroYaw() - current) * .01));
             motorBR.setPower(BR);
+            //  Make this number smaller
             motorFR.setPower(FR + ((sensor.getGyroYaw() - current) * .01));
         }
         else
@@ -315,24 +325,37 @@ public class Drivetrain_Mecanum{
 
     public void strafeRed(double diag1, double diag2, double direction, double current){
 
+        // Passing positive numbers
+
+        // Negatives
         final double FL = diag1 * Math.sin(direction - Math.PI/4);
         final double FR = diag2 * Math.sin(direction - Math.PI/4);
+
+        // Positives
         final double BL = diag2 * Math.cos(direction - Math.PI/4);
         final double BR = diag1 * Math.cos(direction - Math.PI/4);
 
-        if(sensor.getGyroYaw() < current - 1)
+        if(sensor.getGyroYaw() < current)
         {
-            motorFL.setPower(FL * 1.15);
+            // Make this number bigger
+            motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
             motorBL.setPower(BL);
-            motorBR.setPower(BR * .87);
+
+            // Make this number smaller
+            motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
             motorFR.setPower(FR);
-        } else if (sensor.getGyroYaw() > current + 1)
+        }
+        else if (sensor.getGyroYaw() > current)
         {
             motorFL.setPower(FL);
-            motorBL.setPower(BL * 1.15);
+            // Make this number bigger
+            motorBL.setPower(BL + ((sensor.getGyroYaw() - current) * .01));
             motorBR.setPower(BR);
-            motorFR.setPower(FR * .87);
-        } else {
+            //  Make this number smaller
+            motorFR.setPower(FR + ((sensor.getGyroYaw() - current) * .01));
+        }
+        else
+        {
             motorFL.setPower(FL);
             motorBL.setPower(BL);
             motorBR.setPower(BR);
@@ -391,18 +414,21 @@ public class Drivetrain_Mecanum{
         final double BL = diag2 * Math.cos(direction - Math.PI/4);
         final double BR = diag1 * Math.cos(direction - Math.PI/4);
 
-        if(sensor.getGyroYaw() < current - 1)
+        if(sensor.getGyroYaw() < current)
         {
             motorFL.setPower(FL);
-            motorBL.setPower(BL * 1.2);
-            motorBR.setPower(BR );
-            motorFR.setPower(FR * .833);
-        } else if (sensor.getGyroYaw() > current + 1) {
-            motorFL.setPower(FL * 1.2);
-            motorBL.setPower(BL );
-            motorBR.setPower(BR * .833);
+            motorBL.setPower(BL - ((current - sensor.getGyroYaw()) * .01));
+            motorBR.setPower(BR);
+            motorFR.setPower(FR - ((current - sensor.getGyroYaw()) * .01));
+
+        } else if (sensor.getGyroYaw() > current)
+        {
+            motorFL.setPower(FL + ((sensor.getGyroYaw() - current) * .01));
+            motorBL.setPower(BL);
+            motorBR.setPower(BR + ((sensor.getGyroYaw() - current) * .01));
             motorFR.setPower(FR);
-        } else {
+        }
+        else {
             motorFL.setPower(FL);
             motorBL.setPower(BL);
             motorBR.setPower(BR);

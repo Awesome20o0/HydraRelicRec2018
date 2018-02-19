@@ -521,9 +521,9 @@ public abstract class PapaSmurfOpMode extends OpMode {
         return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
     }
 
-    public double getVoltage() {
-        return hardwareMap.voltageSensor.get("Motor Controller 5").getVoltage();
-    }
+//    public double getVoltage() {
+//        return hardwareMap.voltageSensor.get("Motor Controller 5").getVoltage();
+//    }
 
     private void composeTelemetry() {
 

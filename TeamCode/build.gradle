@@ -14,7 +14,7 @@ apply from: '../build.common.gradle'
 
 dependencies {
     compile project(':FtcRobotController')
-    compile project(':openCVLibrary331')
+    // compile project(':openCVLibrary331')
 }
 
 /*android {

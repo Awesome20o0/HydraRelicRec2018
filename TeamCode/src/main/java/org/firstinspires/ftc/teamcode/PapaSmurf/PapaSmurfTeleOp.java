@@ -18,11 +18,16 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
     @Override
     public void loop() {
 
-        if (gamepad1.left_bumper) {
+        int count = 0;
+
+        if (gamepad1.left_trigger > .1) {
             slowingFactor = .5;
-        } else {
+        }
+        else {
             slowingFactor = 1;
         }
+
+
 
         if (gamepad1.b)
             tank = !tank;
@@ -78,7 +83,7 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
 //            if (Math.abs(gamepad1.right_stick_x) > .3 && (Math.abs(gamepad1.left_stick_x) > .3)) {
 //
 //                motorFL.setPower(((gamepad1.right_stick_x + gamepad1.left_stick_x) / 2.0) * slowingFactor);
-//                motorFR.setPower(((gamepad1.right_stick_x + gamepad1.left_stick_x) / 2.0) * slowingFactor);
+//                motorFR.setPower(((gamepad1.right_stick_x a+ gamepad1.left_stick_x) / 2.0) * slowingFactor);
 //                motorBL.setPower(-((gamepad1.right_stick_x + gamepad1.left_stick_x) / 2.0) * slowingFactor);
 //                motorBR.setPower(-((gamepad1.right_stick_x + gamepad1.left_stick_x) / 2.0) * slowingFactor);
 //
@@ -187,11 +192,11 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
                 }
             }
 
-            if (gamepad1.left_trigger > .1 && gamepad1.right_trigger > .1) {
+            if (gamepad1.left_bumper && gamepad1.right_bumper) {
                 outputIn(.85);
-            } else if (gamepad1.right_trigger > .1) {
+            } else if (gamepad1.right_bumper) {
                 outputOut(.85);
-            } else if (gamepad1.left_trigger > .1) {
+            } else if (gamepad1.left_bumper) {
                 stopOutput();
             }
 
@@ -336,11 +341,11 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
             }
         }
 
-        //if none of our motors are running, get the voltage
-        if (motorBL.getPower() == 0 && motorBR.getPower() == 0 && motorFL.getPower() == 0 &&
-                motorFR.getPower() == 0) {
-             voltage = getVoltage();
-        }
+//        //if none of our motors are running, get the voltage
+//        if (motorBL.getPower() == 0 && motorBR.getPower() == 0 && motorFL.getPower() == 0 &&
+//                motorFR.getPower() == 0) {
+//             voltage = getVoltage();
+//        }
 
         //Changes endGame boolean on button press
         if (gamepad2.y) {
@@ -349,9 +354,10 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
             omnipStop();
             stopOutput();
             intakeStop();
+            //                armUpToIn();
+            openHand();
             try {
-                armUpToIn();
-                openHand();
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

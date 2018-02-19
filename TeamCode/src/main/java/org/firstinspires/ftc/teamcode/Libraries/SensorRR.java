@@ -64,10 +64,10 @@ public class SensorRR {
 
     // Change to distance sensor R
     public double getDistanceR(){
-//        double dist
-//        while (dist > 1000 || Double.isNaN(dist))
-//            dist = distanceSensorR.getDistance(DistanceUnit.CM);
-        return distanceSensorR.getDistance(DistanceUnit.CM);
+        double dist = distanceSensorR.getDistance(DistanceUnit.CM);
+        while (dist > 1000 || Double.isNaN(dist) || dist == 255)
+            dist = distanceSensorR.getDistance(DistanceUnit.CM);
+        return dist;
     }
 
 

@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.Libraries.SensorRR;
 /**
  * Created by willi on 11/6/2017.
  */
-@Autonomous(name = "BlueRP", group = "LinearOpMode")
+@Autonomous(name = "RP Blue", group = "LinearOpMode")
 public class RPBlueAuto extends LinearOpMode {
     private GlyphScorer glyphScorer;
     private Drivetrain_Mecanum drivetrainM;
@@ -36,140 +36,147 @@ public class RPBlueAuto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        while(!isStopRequested()) {
-            drivetrainM = new Drivetrain_Mecanum(this);
-            glyphScorer = new GlyphScorer(this);
-            sensors = new SensorRR(this, true);
-            arm = new JewelArm(this);
+        drivetrainM = new Drivetrain_Mecanum(this);
+        glyphScorer = new GlyphScorer(this);
+        sensors = new SensorRR(this, true);
+        arm = new JewelArm(this);
 
-            composeTelemetry();
+        composeTelemetry();
 
-            // Start the actual process of looping
-            waitForStart();
+        // Start the actual process of looping
+        waitForStart();
 
-            getVuMark();
+        getVuMark();
 
-            // Move omnipulator up to prevent it from hitting the balancing stone
-            glyphScorer.liftUp();
+        // Move omnipulator up to prevent it from hitting the balancing stone
+        glyphScorer.liftUp();
 
-            // Knock off correct jewel ball
-            arm.armOut();
+        // Knock off correct jewel ball
+        arm.armOut();
 
-            Thread.sleep(500);
+        Thread.sleep(500);
 
-            int color = sensors.getColorValue();
-            if (color < 0) {
-                // Move servo clockwise
-                arm.armKick(.13);
-            } else {
-                // Move servo counter clockwise
-                arm.armKick(.93);
+        int color = sensors.getColorValue();
+        if (color > 0) {
+            // Move servo clockwise
+            arm.armKick(.13);
+        } else {
+            // Move servo counter clockwise
+            arm.armKick(.93);
+        }
+
+        Thread.sleep(500);
+
+        arm.armInit();
+
+
+        // Move off of the balancing stone
+        drivetrainM.movepid(.3, 900, .1, .0007, .0004, 0, 25, 0, Math.PI / 2, 5);
+
+        Thread.sleep(500);
+
+        // Turn 90 degrees towards cryptobox
+        drivetrainM.pid(.3, -90, .1, .007, .005, 0, 2, 5);
+
+        if (sensors.getGyroYaw() < -100) {
+            while(sensors.getGyroYaw() < -92 && !isStopRequested()){
+                drivetrainM.startMotors(-.2, .2);
             }
+        }
 
-            Thread.sleep(500);
+//        double previous = drivetrainM.getEncoderAvg();
+//
+//        while (drivetrainM.getEncoderAvg() < 1500 + previous)
+//        {
+//            drivetrainM.startMotors(-.25, -.25);
+//        }
+//
 
-            arm.armInit();
+        //        Thread.sleep(500);
 
+        telemetry.update();
+        // Drive towards cryptobox
+        drivetrainM.movepid(.3, 1750, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 3.5);
 
-            // Move off of the balancing stone
-            drivetrainM.movepid(.3, 900, .1, .0007, .0004, 0, 25, 0, Math.PI / 2, 5);
+        //        Thread.sleep(500);
 
-            Thread.sleep(500);
+        runtime.reset();
 
-            // Turn 90 degrees towards cryptobox
-
-            drivetrainM.pid(.3, -90, .1, .007, .005, 0, 2, 5);
-
-            if (sensors.getGyroYaw() < -100) {
-                Thread.sleep(100);
-
-                drivetrainM.pid(.3, -90, .1, .007, .005, 0, 1, 5);
-            }
-
-            //        Thread.sleep(500);
-
+        while ((sensors.getDistanceR() > 26) && (runtime.seconds() < 5) && !isStopRequested() && sensors.getDistanceR() != 0) {
             telemetry.update();
-            // Drive towards cryptobox
-            drivetrainM.movepid(.3, 1950, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 4);
+            drivetrainM.strafe(.7, .7, 0, -95);
+        }
 
-            //        Thread.sleep(500);
+        runtime.reset();
 
-            runtime.reset();
+        if (vu == 1) {
 
-            while ((sensors.getDistanceR() > 26) && (runtime.seconds() < 4) && !isStopRequested()) {
+            while ((sensors.getDistanceR()) < 39 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested()) {
                 telemetry.update();
-                drivetrainM.strafe(.5, .5, 0, -90);
+                drivetrainM.strafeLeft(-.5, -.5, 0, -88);
             }
-
-            while (sensors.getDistanceR() < 22) {
-                telemetry.update();
-                drivetrainM.strafeLeft(-.8, -.8, 0, -90);
-            }
-
-            runtime.reset();
-
-            if (vu == 1) {
-
-                while ((sensors.getDistanceR()) < 39 && (runtime.seconds() < 7)) {
-                    telemetry.update();
-                    drivetrainM.strafeLeft(-.5, -.5, 0, -90);
-                }
-
-                drivetrainM.stopMotors();
-            }
-            if (vu == 2) {
-
-                while ((sensors.getDistanceR()) < 59 && (runtime.seconds() < 6)) {
-                    telemetry.update();
-                    drivetrainM.strafeLeft(-.5, -.5, 0, -90);
-                }
-                drivetrainM.stopMotors();
-            }
-            if (vu == 3) {
-
-                while ((sensors.getDistanceR()) < 79 && (runtime.seconds() < 6)) {
-                    telemetry.update();
-                    drivetrainM.strafeLeft(-.5, -.5, 0, -90);
-                }
-                drivetrainM.stopMotors();
-            }
-
-            Thread.sleep(500);
-            //
-            //        // Move forward and deposit
-            drivetrainM.startMotors(-.3, -.3);
-
-            Thread.sleep(500);
-            //
-            glyphScorer.outputOut();
-            //
-            Thread.sleep(700);
-            //
-            //        // Back up to park
-            drivetrainM.startMotors(.3, .3);
-
-            Thread.sleep(500);
-
-            drivetrainM.stopMotors();
-
-            Thread.sleep(200);
-
-            drivetrainM.startMotors(-.5, -.5);
-
-            Thread.sleep(500);
-
-            drivetrainM.stopMotors();
-
-            Thread.sleep(200);
-
-            drivetrainM.startMotors(.25, .25);
-
-            Thread.sleep(250);
-
-            glyphScorer.stopOutput();
 
             drivetrainM.stopMotors();
         }
+        if (vu == 2) {
+
+            while ((sensors.getDistanceR()) < 56.5 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested())  {
+                telemetry.update();
+                drivetrainM.strafeLeft(-.5, -.5, 0, -88);
+            }
+
+            drivetrainM.stopMotors();
+        }
+        if (vu == 3) {
+
+            while ((sensors.getDistanceR()) < 74 && (runtime.seconds() < 8) && sensors.getDistanceR() != 0 && !isStopRequested()) {
+                telemetry.update();
+                drivetrainM.strafeLeft(-.5, -.5, 0, -89);
+            }
+
+            drivetrainM.stopMotors();
+        }
+
+//        while (sensors.getGyroYaw() < -80 && !isStopRequested()){
+//            drivetrainM.startMotors(-.2, .2);
+//        }
+//
+        Thread.sleep(500);
+
+        // Move forward and deposits
+        drivetrainM.startMotors(-.3, -.3);
+
+        Thread.sleep(500);
+
+        glyphScorer.outputOut();
+
+        Thread.sleep(700);
+
+        // Back up to park
+        drivetrainM.startMotors(.3, .3);
+
+        Thread.sleep(500);
+
+        drivetrainM.stopMotors();
+
+        Thread.sleep(500);
+
+        drivetrainM.startMotors(-.5, -.5);
+
+        Thread.sleep(500);
+
+        drivetrainM.stopMotors();
+
+        Thread.sleep(200);
+
+        drivetrainM.startMotors(.25, .25);
+
+        Thread.sleep(250);
+
+        glyphScorer.stopOutput();
+
+        drivetrainM.stopMotors();
+
     }
 
 

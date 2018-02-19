@@ -96,7 +96,7 @@ public class NewBlueAuto extends LinearOpMode {
 
         telemetry.update();
         // Drive towards cryptobox
-        drivetrainM.movepid(.3, 2050, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 4);
+        drivetrainM.movepid(.3, 1750, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 3.5);
 
         //        Thread.sleep(500);
 
@@ -104,47 +104,47 @@ public class NewBlueAuto extends LinearOpMode {
 
         while ((sensors.getDistanceR() > 26) && (runtime.seconds() < 5) && !isStopRequested() && sensors.getDistanceR() != 0) {
             telemetry.update();
-            drivetrainM.strafe(.6, .6, 0, -90);
+            drivetrainM.strafe(.7, .7, 0, -95);
         }
 
         runtime.reset();
 
         if (vu == 1) {
 
-            while ((sensors.getDistanceR()) < 32 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested()) {
+            while ((sensors.getDistanceR()) < 39 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested()) {
                 telemetry.update();
-                drivetrainM.strafeLeft(-.5, -.5, 0, -90);
+                drivetrainM.strafeLeft(-.5, -.5, 0, -88);
             }
 
             drivetrainM.stopMotors();
         }
         if (vu == 2) {
 
-            while ((sensors.getDistanceR()) < 52 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested())  {
+            while ((sensors.getDistanceR()) < 56.5 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested())  {
                 telemetry.update();
-                drivetrainM.strafeLeft(-.5, -.5, 0, -90);
+                drivetrainM.strafeLeft(-.5, -.5, 0, -88);
             }
 
             drivetrainM.stopMotors();
         }
         if (vu == 3) {
 
-            while ((sensors.getDistanceR()) < 72 && (runtime.seconds() < 6) && sensors.getDistanceR() != 0 && !isStopRequested()) {
+            while ((sensors.getDistanceR()) < 74 && (runtime.seconds() < 8) && sensors.getDistanceR() != 0 && !isStopRequested()) {
                 telemetry.update();
-                drivetrainM.strafeLeft(-.5, -.5, 0, -90);
+                drivetrainM.strafeLeft(-.5, -.5, 0, -89);
             }
 
             drivetrainM.stopMotors();
         }
 
-        while (sensors.getGyroYaw() < -80 && !isStopRequested()){
-            drivetrainM.startMotors(-.2, .2);
-        }
-
+//        while (sensors.getGyroYaw() < -80 && !isStopRequested()){
+//            drivetrainM.startMotors(-.2, .2);
+//        }
+//
         Thread.sleep(500);
 
         // Move forward and deposits
-        drivetrainM.startMotors(-.3, -.35);
+        drivetrainM.startMotors(-.3, -.3);
 
         Thread.sleep(500);
 

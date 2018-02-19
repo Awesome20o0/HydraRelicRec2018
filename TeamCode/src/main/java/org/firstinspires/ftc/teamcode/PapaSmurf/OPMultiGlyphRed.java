@@ -19,8 +19,8 @@ import org.firstinspires.ftc.teamcode.Libraries.SensorRR;
 /**
  * Created by willi on 11/6/2017.
  */
-@Autonomous(name = "New Red Auto", group = "LinearOpMode")
-public class NewRedAuto extends LinearOpMode {
+@Autonomous(name = "OP OP", group = "LinearOpMode")
+public class OPMultiGlyphRed extends LinearOpMode {
     private GlyphScorer glyphScorer;
     private Drivetrain_Mecanum drivetrainM;
     private String version;
@@ -86,8 +86,11 @@ public class NewRedAuto extends LinearOpMode {
 //        Thread.sleep(500);
 
         telemetry.update();
+
+        drivetrainM.movepid(.3, 1925, .1, .00048, .0005, 0, 25, 0, 3*(Math.PI / 2), 4);
+
         // Drive towards cryptobox
-        drivetrainM.movepid(.3, 1750, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 4);
+        drivetrainM.movepid(.3, 3850, .1, .00048, .0005, 0, 25, 0, Math.PI / 2, 4);
 
 //        Thread.sleep(500);
 
@@ -95,21 +98,21 @@ public class NewRedAuto extends LinearOpMode {
 
         while ((sensors.getDistanceL() > 26) && (runtime.seconds() < 4) && !isStopRequested() && sensors.getDistanceL() != 0) {
             telemetry.update();
-            drivetrainM.strafeLeftRed(-.7, -.7, 0, 95);
+            drivetrainM.strafeLeftRed(-.7, -.7, 0, 90);
         }
-//
-//        while (sensors.getDistanceL() < 22 && !isStopRequested() && sensors.getDistanceL() != 0) {
-//            telemetry.update();
-//            drivetrainM.strafeRed(.8, .8, 0, 91);
-//        }
+
+        while (sensors.getDistanceL() < 22 && !isStopRequested() && sensors.getDistanceL() != 0) {
+            telemetry.update();
+            drivetrainM.strafeRed(.8, .8, 0, 90);
+        }
 
         runtime.reset();
 
         if (vu == 1) {
 
-            while ((sensors.getDistanceL()) < 77 && (runtime.seconds() < 7) && !isStopRequested() && sensors.getDistanceL() != 0) {
+            while ((sensors.getDistanceL()) < 79 && (runtime.seconds() < 7) && !isStopRequested() && sensors.getDistanceL() != 0) {
                 telemetry.update();
-                drivetrainM.strafeRed(.5, .5, 0, 88);
+                drivetrainM.strafeRed(.5, .5, 0, 90);
             }
             drivetrainM.stopMotors();
         }
@@ -117,15 +120,15 @@ public class NewRedAuto extends LinearOpMode {
 
             while ((sensors.getDistanceL()) < 59 && (runtime.seconds() < 6)&& !isStopRequested() && sensors.getDistanceL() != 0) {
                 telemetry.update();
-                drivetrainM.strafeRed(.5, .5, 0, 88);
+                drivetrainM.strafeRed(.5, .5, 0, 90);
             }
             drivetrainM.stopMotors();
         }
         if (vu == 3) {
 
-            while ((sensors.getDistanceL()) < 40 && (runtime.seconds() < 5) && !isStopRequested() && sensors.getDistanceL() != 0) {
+            while ((sensors.getDistanceL()) < 39 && (runtime.seconds() < 6) && !isStopRequested() && sensors.getDistanceL() != 0) {
                 telemetry.update();
-                drivetrainM.strafeRed(.5, .5, 0, 88);
+                drivetrainM.strafeRed(.5, .5, 0, 90);
             }
             drivetrainM.stopMotors();
         }
