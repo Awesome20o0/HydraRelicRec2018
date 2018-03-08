@@ -81,7 +81,7 @@ public class GlyphScorer {
 
     public void liftUp() throws InterruptedException {
         lift.setPower(1);
-        Thread.sleep(300);
+        Thread.sleep(350);
         lift.setPower(0);
     }
 
@@ -106,6 +106,11 @@ public class GlyphScorer {
         relic.setPower(-1);
         Thread.sleep(2000);
         relic.setPower(0);
+    }
+
+    public int getIntakeEncoders() {
+        return (Math.abs(intakeL.getCurrentPosition()) +
+                Math.abs(intakeR.getCurrentPosition())) / 2;
     }
 
 

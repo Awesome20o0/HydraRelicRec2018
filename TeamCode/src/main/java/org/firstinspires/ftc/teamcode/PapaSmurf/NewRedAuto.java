@@ -132,7 +132,7 @@ public class NewRedAuto extends LinearOpMode {
 
         Thread.sleep(500);
 //
-//        // Move forward and deposit
+//      Move forward and deposit
         drivetrainM.startMotors(-.3, -.3);
 
         Thread.sleep(500);

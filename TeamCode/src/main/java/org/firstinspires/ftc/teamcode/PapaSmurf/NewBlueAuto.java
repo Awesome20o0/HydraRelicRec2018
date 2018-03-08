@@ -69,7 +69,6 @@ public class NewBlueAuto extends LinearOpMode {
 
         arm.armInit();
 
-
         // Move off of the balancing stone
         drivetrainM.movepid(.3, 900, .1, .0007, .0004, 0, 25, 0, Math.PI / 2, 5);
 
@@ -144,7 +143,7 @@ public class NewBlueAuto extends LinearOpMode {
         Thread.sleep(500);
 
         // Move forward and deposits
-        drivetrainM.startMotors(-.3, -.3);
+        drivetrainM.startMotors(-.33, -.3);
 
         Thread.sleep(500);
 

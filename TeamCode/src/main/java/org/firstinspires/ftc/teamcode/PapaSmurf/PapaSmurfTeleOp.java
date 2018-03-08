@@ -13,6 +13,7 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
 
     private double slowingFactor = 1;
     private boolean endGame = false;
+//    private boolean hooks = true;
 
 
     @Override
@@ -26,6 +27,15 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
         else {
             slowingFactor = 1;
         }
+
+//        if (gamepad1.x) {
+//
+//            hooksUp();
+//        }
+//
+//        if (gamepad1.a){
+//            hooksDown();
+//        }
 
 
 
@@ -216,13 +226,7 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
                 liftUp(1);
             }
 
-//            if (gamepad1.left_bumper) {
-//                hooksUp();
-//            }
-//
-//            if (gamepad1.right_bumper) {
-//                hooksDown();
-//            }
+
 
 //            if (gamepad1.dpad_left){
 //                try {
@@ -252,7 +256,27 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
         }
 
         if(endGame) {
-
+            if(gamepad1.x){
+//                // Move omnipulator up to prevent it from hitting the balancing stone
+//                        double kP_FB = .0556;
+//                        double kP_LR = .0234;
+//
+//                        double diffPitch = drivetrainM.sensor.getGyroPitch();
+//                        double diffRoll = drivetrainM.sensor.getGyroRoll();
+//
+//                        double PIDchangeFB = -kP_FB* diffRoll;
+//                        double PIDchangeLR = -kP_LR* diffPitch;
+//
+//                        double max = Math.max(Math.abs(PIDchangeFB+PIDchangeLR), Math.abs(PIDchangeFB - PIDchangeLR));
+//
+//                        max = max > 1 ? max : 1;
+//
+//                        drivetrainM.motorFL.setPower((PIDchangeFB + PIDchangeLR ) / max);
+//                        drivetrainM.motorBL.setPower((PIDchangeFB + PIDchangeLR ) / max);
+//                        drivetrainM.motorFR.setPower((PIDchangeFB - PIDchangeLR ) / max);
+//                        drivetrainM.motorBR.setPower((PIDchangeFB - PIDchangeLR ) / max);
+//                    }
+            }
             stopOutput();
 
             if(gamepad2.dpad_up){
@@ -350,10 +374,12 @@ public class PapaSmurfTeleOp extends PapaSmurfOpMode {
         //Changes endGame boolean on button press
         if (gamepad2.y) {
 
+            liftStop();
             stopMotors();
             omnipStop();
             stopOutput();
             intakeStop();
+            shoulderUp();
             //                armUpToIn();
             openHand();
             try {

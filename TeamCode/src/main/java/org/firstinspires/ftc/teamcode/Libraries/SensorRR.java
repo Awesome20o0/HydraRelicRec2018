@@ -27,6 +27,7 @@ public class SensorRR {
     ColorSensor jewelSensorRight;
     ModernRoboticsI2cRangeSensor distanceSensorL;
     ModernRoboticsI2cRangeSensor distanceSensorR;
+    ModernRoboticsI2cRangeSensor distanceSensorF;
 
     public SensorRR(LinearOpMode opMode, boolean imuEnabled) throws InterruptedException {
 
@@ -35,6 +36,7 @@ public class SensorRR {
         jewelSensorRight = opMode.hardwareMap.colorSensor.get("jewelSensorR");
         distanceSensorL = opMode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "distanceL");
         distanceSensorR = opMode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "distanceR");
+        distanceSensorF = opMode.hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "distanceF");
 
         if (imuEnabled) {
 
@@ -57,8 +59,15 @@ public class SensorRR {
 
     public double getDistanceL(){
         double dist = distanceSensorL.getDistance(DistanceUnit.CM);
-        while (dist > 1000 || Double.isNaN(dist))
+        while (dist > 1000 || Double.isNaN(dist) || dist == 255)
             dist = distanceSensorL.getDistance(DistanceUnit.CM);
+        return dist;
+    }
+
+    public double getDistanceF(){
+        double dist = distanceSensorF.getDistance(DistanceUnit.CM);
+        while (dist > 1000 || Double.isNaN(dist) || dist == 255)
+            dist = distanceSensorF.getDistance(DistanceUnit.CM);
         return dist;
     }
 

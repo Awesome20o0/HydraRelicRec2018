@@ -64,6 +64,14 @@ public class Drivetrain_Mecanum{
                 Math.abs(motorFL.getCurrentPosition())) / 4;
     }
 
+    public void moveEncoder(int encoders, double power) throws InterruptedException {
+        resetEncoders();
+
+        while (encoders > getEncoderAvg()){
+            startMotors(power, power);
+        }
+    }
+
 
     public void movepid(double power, int distance, double floor, double kP, double kI, double kD, int accuracy, double rotation, double direction, double timeout) throws InterruptedException {
 
@@ -298,11 +306,30 @@ public class Drivetrain_Mecanum{
         if(sensor.getGyroYaw() < current)
         {
             // Make this number bigger
-            motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
+
+            if (Math.abs(FL - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (FL - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorFL.setPower(.2);
+                else
+                    motorFL.setPower(-.2);
+                }
+            else {
+                motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorBL.setPower(BL);
 
             // Make this number smaller
-            motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(BR - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (BR - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorBR.setPower(.2);
+                else
+                    motorBR.setPower(-.2);
+            }
+            else {
+                motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorFR.setPower(FR);
         }
         else if (sensor.getGyroYaw() > current)
@@ -338,11 +365,29 @@ public class Drivetrain_Mecanum{
         if(sensor.getGyroYaw() < current)
         {
             // Make this number bigger
-            motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(FL - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (FL - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorFL.setPower(.2);
+                else
+                    motorFL.setPower(-.2);
+            }
+            else {
+                motorFL.setPower(FL - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorBL.setPower(BL);
 
             // Make this number smaller
-            motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(BR - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (BR - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorBR.setPower(.2);
+                else
+                    motorBR.setPower(-.2);
+            }
+            else {
+                motorBR.setPower(BR - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorFR.setPower(FR);
         }
         else if (sensor.getGyroYaw() > current)
@@ -388,9 +433,27 @@ public class Drivetrain_Mecanum{
         if(sensor.getGyroYaw() < current)
         {
             motorFL.setPower(FL);
-            motorBL.setPower(BL - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(BL - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (BL - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorBL.setPower(.2);
+                else
+                    motorBL.setPower(-.2);
+            }
+            else {
+                motorBL.setPower(BL - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorBR.setPower(BR);
-            motorFR.setPower(FR - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(FR - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (FR - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorFR.setPower(.2);
+                else
+                    motorFR.setPower(-.2);
+            }
+            else {
+                motorFR.setPower(FR - ((current - sensor.getGyroYaw()) * .01));
+            }
 
         } else if (sensor.getGyroYaw() > current)
         {
@@ -417,9 +480,27 @@ public class Drivetrain_Mecanum{
         if(sensor.getGyroYaw() < current)
         {
             motorFL.setPower(FL);
-            motorBL.setPower(BL - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(BL - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (BL - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorBL.setPower(.2);
+                else
+                    motorBL.setPower(-.2);
+            }
+            else {
+                motorBL.setPower(BL - ((current - sensor.getGyroYaw()) * .01));
+            }
             motorBR.setPower(BR);
-            motorFR.setPower(FR - ((current - sensor.getGyroYaw()) * .01));
+            if (Math.abs(FR - ((current - sensor.getGyroYaw()) * .01)) < .2)
+            {
+                if (FR - ((current - sensor.getGyroYaw()) * .01) > 0)
+                    motorFR.setPower(.2);
+                else
+                    motorFR.setPower(-.2);
+            }
+            else {
+                motorFR.setPower(FR - ((current - sensor.getGyroYaw()) * .01));
+            }
 
         } else if (sensor.getGyroYaw() > current)
         {

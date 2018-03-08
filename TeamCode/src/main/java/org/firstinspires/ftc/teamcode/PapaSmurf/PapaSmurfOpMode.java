@@ -240,17 +240,17 @@ public abstract class PapaSmurfOpMode extends OpMode {
     public void minuteUp() {
         minute.setPosition(.5);
     }
-//
+
 //    public void hooksDown() {
-//        hookL.setPosition(-.75);
-//        hookR.setPosition(.75);
+//        hookL.setPosition(.8);
+//        hookR.setPosition(0);
 //    }
 //
 //    public void hooksUp() {
-//        hookL.setPosition(.5);
-//        hookR.setPosition(-.1);
+//        hookL.setPosition(0);
+//        hookR.setPosition(.8);
 //    }
-//
+
 //    public void balance() throws InterruptedException {
 //        startMotors(-1, -1);
 //        Thread.sleep(800);
